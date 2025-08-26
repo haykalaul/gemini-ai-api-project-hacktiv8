@@ -9,7 +9,7 @@ const upload = multer({ dest: "uploads/" });
 const ai = new GoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY });
 
 // Set your default Gemini model here
-const GEMINI_MODEL = "gemini-2.0-flash";
+const GEMINI_MODEL = "gemini-1.5-flash";
 
 app.use(express.json());
 
@@ -38,7 +38,7 @@ app.post("/generate-text", async (req, res) => {
     const { prompt } = req.body;
 
     // Get model instance
-    const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
     const result = await model.generateContent({
       contents: [{ parts: [{ text: prompt }] }],
     });
