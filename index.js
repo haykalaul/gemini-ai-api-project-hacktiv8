@@ -6,10 +6,11 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const app = express();
 const upload = multer();
+console.log('API key loaded?', process.env.GEMINI_API_KEY ? 'YES' : 'NO');
 const ai = new GoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY });
 
 // Set your default Gemini model here
-const GEMINI_MODEL = "gemini-1.5-flash";
+const GEMINI_MODEL = "gemini-pro";
 
 app.use(express.json());
 
@@ -36,7 +37,7 @@ app.post("/generate-text", async (req, res) => {
     const { prompt } = req.body;
 
     // Get model instance
-    const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = ai.getGenerativeModel({ model: 'gemini-pro' });
     const result = await model.generateContent({
       contents: [{ parts: [{ text: prompt }] }],
     });
